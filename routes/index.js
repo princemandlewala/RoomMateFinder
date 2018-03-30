@@ -212,7 +212,7 @@ module.exports = function (app,User,mongoose,session) {
 			//smtp logic
 			rand=Math.floor((Math.random()*100)+54);
 			host=req.get('host');
-			link="https://"+req.get('host')+"/verify?id="+rand;
+			link="http://"+req.get('host')+"/verify?id="+rand;
 			mailOptions={
 				to: req.body.signupEmail+"@ncsu.edu",
 				subject: "Please confirm your email account",
@@ -225,7 +225,6 @@ module.exports = function (app,User,mongoose,session) {
 				console.log(error);
 				res.end("error"); 
 			}else{
-				console.log("Message sent:"+res.message);
 				let emailMessage = [];
 				emailMessage.push({text:'Your email has been verified successfully! Please log into your account to use our services.'});
 				res.render('login/index',{emailMessage: emailMessage});
@@ -282,7 +281,7 @@ module.exports = function (app,User,mongoose,session) {
 	
 	app.get('/verify',(req,res)=>{
 		console.log(req.protocol+":/"+req.get('host'));
-		if(("https://"+req.get('host'))==("https://"+host)){
+		if((req.protocol+"://"+req.get('host'))==("http://"+host)){
     		console.log("Domain is matched. Information is from Authentic email");
 			if(req.query.id==rand){
 				console.log("email is verified");
