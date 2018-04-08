@@ -3,6 +3,7 @@ module.exports = {
     NOTAVAILABLE: "Not-Available",
     VEG  : 'Vegeterian',
     NON_VEG : 'Non-Vegeterian',
+    F : 'Flexible',
     MALE : 'Male',
     FEMALE : 'Female',
     SMOKING : 'Smoking',
