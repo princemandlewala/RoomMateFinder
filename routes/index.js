@@ -1,10 +1,10 @@
 var nodemailer=require("nodemailer");
 var bcrypt=require("bcryptjs");
 var smtpTransport=nodemailer.createTransport({
-	service: "gmail",
+	service: "Gmail",
 	auth:{
-		user: "aishwaryassr@gmail.com",
-		pass: "Macrohard**123"
+		user: "wolfsharenc@gmai.com",
+		pass: "9197375362"
 	}
 });
 
@@ -230,10 +230,10 @@ module.exports = function (app,User,mongoose,session) {
 				res.render('login/index',{emailMessage: emailMessage});
 				//res.end("sent");
 			}
-		});
-	}});
-	
-	app.post('/signin',(req,res)=>{
+        })
+        }
+})
+    app.post('/signin',(req,res)=>{
 		console.log(req.body.loginEmail)
 		//Check if the user has already set his characteristics
 		
