@@ -1,5 +1,5 @@
 var nodemailer=require("nodemailer");
-var bcrypt=require("bcrypt");
+var bcrypt=require("bcryptjs");
 var smtpTransport=nodemailer.createTransport({
 	service: "Gmail",
 	auth:{
