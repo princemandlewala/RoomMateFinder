@@ -1,8 +1,10 @@
 module.exports = {
     AVAILABLE: "Available",
     NOTAVAILABLE: "Not-Available",
+    FLEXIBLE: "Flexible",
     VEG  : 'Vegeterian',
     NON_VEG : 'Non-Vegeterian',
+    F : 'Flexible',
     MALE : 'Male',
     FEMALE : 'Female',
     SMOKING : 'Smoking',

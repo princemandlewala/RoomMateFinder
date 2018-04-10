@@ -24,15 +24,15 @@ app.set('view engine', 'handlebars');
 //Demo of deploying via heroku
 
 //Body parser middleware
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // Map global promise- get rid of warning
 mongoose.Promise= global.Promise;
 
 // Connect to mongoDB
 function connect () {
-  mongoose.connect('mongodb://localhost:27017/roomMateFinder').then(()=> console.log('MongoDB connected')).catch(err=>console.log(err));
+    mongoose.connect('mongodb://localhost').then(()=> console.log('MongoDB connected')).catch(err => console.log(err));
 
 }
 
@@ -54,6 +54,7 @@ const User=mongoose.model('users');
 //   console.log(docs)
 //
 // })
+
 
 
 require('./models/request');
@@ -85,7 +86,7 @@ require('./routes')(app,User,mongoose,session);
 //Sign up successful view
  app.get('/users/successful',(req,res)=>{
   res.render('users/successful');
- });
+})
 
 //connect to userProfile/index
 // app.get('/userProfile/index',(req,res)=>{
@@ -176,11 +177,11 @@ if(errors.length>0){
     room_sharing: req.body.room_sharing,
     earliest_move_in_date: req.body.earliest_move_in_date,
     latest_move_in_date: req.body.latest_move_in_date
-  }
+  };
   new User(newUser).save();
   res.render('users/successful')
 }
- });
+})
 
 //sending request
 
@@ -191,15 +192,14 @@ if(errors.length>0){
   receiverID:2345
   }
   new Request(newRequest).save();
-  res.render('users/requestSuccessful')
-});
+  res.render('users/requestSuccessful');
+})
 
- // Process signin form
+// Process signin form
  app.get('/loginsuccess',(req,res)=>{
  res.render('loginsuccess');
- });
-
- app.post('/',(req,res)=>{
+})
+app.post('/',(req,res)=>{
    console.log("testing..");
  console.log(req.body.email);
  console.log(req.body.password);
@@ -219,12 +219,12 @@ if(errors.length>0){
       console.log('Signin failure');
     }
   });
- });
+})
 
 // Review-roomie page
 app.get('/users/reviewroomie',(req,res)=>{
  res.render('users/reviewroomie');
-});
+})
 
 //app.get('/signup',(req,res)=>{
  //  res.render('signup');
@@ -232,7 +232,7 @@ app.get('/users/reviewroomie',(req,res)=>{
 
 app.get('/users/signup',(req,res)=>{
   res.render('users/signup');
-});
+})
 
 //logout
 app.get('/users/logout', function (req, res) {
@@ -242,7 +242,7 @@ app.get('/users/logout', function (req, res) {
 
 app.get('/landing',(req,res)=>{
   res.render('landing/landing');
-});
+})
 
 
 // app.get('/userProfile/editprofile',(req,res)=>{
