@@ -3,8 +3,8 @@ var bcrypt=require("bcrypt");
 var smtpTransport=nodemailer.createTransport({
 	service: "gmail",
 	auth:{
-		user: "aishwaryassr@gmail.com",
-		pass: "Macrohard**123"
+		user: "ncroommatefinder@gmail.com",
+		pass: "9197375362"
 	}
 });
 
@@ -492,7 +492,17 @@ module.exports = function (app,User,mongoose,session) {
 	})
 
 	})
-
+	//chat with user
+	app.post('/chat', (req, res)=>{
+		console.log("doing chat");
+		console.log(req.body.chat+" username");
+		User.find({email: req.body.chat}, (err, docs)=>{
+			if(err)
+			throw err;
+			
+			res.render('search/chat', {hasloggedin: hasloggedin,usersession: req.session.user[0],chatWith: docs[0].first_name+" "+docs[0].last_name});
+		})
+	});
 	//Logout
 	app.get('/logout', function (req, res) {
 		req.session.destroy();

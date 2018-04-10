@@ -31,6 +31,11 @@
                   {{!-- <input class="btn btn-info btn-lg" type="submit" name="connectprofile" data-toggle="modal"  value="{{useris.email}}" /> --}}
                   <button class="btn btn-info btn-lg" type="submit" name="connectprofile" data-toggle="modal" value="{{useris.email}}" >CONNECT</button>
                   </form>
+                  <form action="/chat" method="post">
+                  {{!-- <a href="#" class="btn btn-info btn-lg">chat</a> --}}
+                  {{!-- <input class="btn btn-info btn-lg" type="submit" name="chat" data-toggle="modal"  value="{{useris.email}}" /> --}}
+                  <button class="btn btn-info btn-lg" type="submit" name="chat" data-toggle="modal" value="{{useris.email}}">CHAT</button>
+                  </form> 
               </div>
           </div>
            {{#if connectmessage}}
