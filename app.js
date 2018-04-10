@@ -9,12 +9,22 @@ const app=express();
 const session = require('express-session');
 var MemcachedStore = require('connect-memcached')(session);
 const connection = connect();
+<<<<<<< Updated upstream
 const port=1234;
 const constant = require('./constants');
 
 app.listen(port,()=>{
   console.log('Server started on port'+port);
 });
+=======
+const port=8082;
+const constant = require('./constants');
+
+app.listen(port,()=>{
+  console.log('Server started on port'+ process.env.PORT);
+})
+
+>>>>>>> Stashed changes
 
 //Handlebars Middleware
 app.set('views', './app/views/');
@@ -31,7 +41,11 @@ mongoose.Promise= global.Promise;
 
 // Connect to mongoDB
 function connect () {
+<<<<<<< Updated upstream
   mongoose.connect('mongodb://localhost:27017/roomMateFinder').then(()=> console.log('MongoDB connected')).catch(err=>console.log(err));
+=======
+    mongoose.connect('mongodb://localhost').then(()=> console.log('MongoDB connected')).catch(err => console.log(err));
+>>>>>>> Stashed changes
 }
 
 module.exports = {
@@ -45,12 +59,21 @@ module.exports = {
 
 require('./app/models/users');
 const User=mongoose.model('users');
+<<<<<<< Updated upstream
 User.find({email: 'priyance',password: '12345'},(err,docs)=>{
   if(err)
    console.log("error")
   console.log(docs) 
 
 })
+=======
+// User.find({email: 'asundar2',password: 'Qwerty@123'},(err,docs)=>{
+//   if(err)
+//    console.log("error")
+//   console.log(docs)
+//
+// })
+>>>>>>> Stashed changes
 
 
 require('./models/request');
