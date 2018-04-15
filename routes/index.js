@@ -121,6 +121,61 @@ module.exports = function (app,User,mongoose,session) {
 			req.session.user=docs;
 			var currUser = req.session.user[0];
 			var query = { email: { $ne: currUser.email}, status: {$ne: "NotAvailable"} , room_sharing: currUser.room_sharing, min_budget : {$lte : currUser.max_budget}, max_budget : {$gte : currUser.min_budget}, location: {$in: currUser.location} };
+
+			var eml =  { email: { $ne: currUser.email}};
+            var stts = {status: {$ne: "NotAvailable"}};
+            var sharn = {room_sharing: currUser.room_sharing};
+			var minbud = {min_budget : {$lte : currUser.max_budget}};
+			var maxbud = {max_budget : {$gte : currUser.min_budget}};
+			var loc = {location: {$in: currUser.location} };
+
+            var Combinatorics = require('js-combinatorics');
+            var cmb;
+            cmb = Combinatorics.power([stts,sharn,minbud, maxbud, loc]);
+            arr = cmb.toArray();
+
+            arr.sort(function(a,b){
+                return b.length - a.length; //ASC, For Descending order use: b - a
+            });
+
+            console.log(arr);
+			//cmb.forEach(function(a){ console.log(a) });
+
+            for (var i = 0, len = arr.length; i < len; i++) {
+            	var aray = arr[i];
+                var querymod = {aray};
+                var results = User.find(querymod, function (errors, docs){
+                    if(docs) {
+                        if(docs.length == 0) {
+                            let message = [];
+                            message.push({text:'No results found'});
+                            console.log('No results found');
+                            res.render('search/search',{
+                                message: message,
+                                usersession: req.session.user[0],
+                                hasloggedin: hasloggedin
+                            });
+                        } else {
+                            console.log('Locality ' + req.session.user[0].location);
+                            res.render('search/search', {usersession: req.session.user[0],hasloggedin: hasloggedin, flag: true, results: docs});
+                        }
+                    } else {
+                        let errors=[];
+                        errors.push({text:'Error in search'});
+                        res.render('search/search',{
+                            errors: errors,
+                            hasloggedin: hasloggedin
+                        });
+                        console.log('Error in search');
+                    }
+                    if(errors)
+                        throw errors
+
+                });
+            }
+
+			//var query1 ={ room_sharing: currUser.room_sharing};
+			//console.log(query1)
 			var results = User.find(query, function (errors, docs){
 				if(docs) {
 					if(docs.length == 0) {
