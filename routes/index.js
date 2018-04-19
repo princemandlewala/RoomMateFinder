@@ -141,10 +141,18 @@ module.exports = function (app,User,mongoose,session) {
             console.log(arr);
 			//cmb.forEach(function(a){ console.log(a) });
 
-            for (var i = 0, len = arr.length; i < len; i++) {
+            console.log("HI");
+            console.log(arr[0]);
+            console.log(arr[1]);
+            console.log(arr[2]);
+            console.log("HI");
+
+            for (var i = 0, len = arr.length; i < len-1; i++) {
             	var aray = arr[i];
                 var querymod = {aray};
+                console.log(querymod)
                 var results = User.find(querymod, function (errors, docs){
+                	console.log(querymod)
                     if(docs) {
                         if(docs.length == 0) {
                             let message = [];
@@ -176,6 +184,7 @@ module.exports = function (app,User,mongoose,session) {
 
 			//var query1 ={ room_sharing: currUser.room_sharing};
 			//console.log(query1)
+			/*
 			var results = User.find(query, function (errors, docs){
 				if(docs) {
 					if(docs.length == 0) {
@@ -203,7 +212,7 @@ module.exports = function (app,User,mongoose,session) {
 				if(errors)
 					throw errors
 
-			});
+			});*/
 		})
 		//var currentUser = req.session.user[0];
 		console.log("session email : " + emailsess);
