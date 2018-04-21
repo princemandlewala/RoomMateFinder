@@ -32,11 +32,8 @@ mongoose.Promise= global.Promise;
 
 // Connect to mongoDB
 function connect () {
-<<<<<<< HEAD
   mongoose.connect('mongodb://localhost:27017').then(()=> console.log('MongoDB connected')).catch(err=>console.log(err));
-=======
-    mongoose.connect('mongodb://localhost').then(()=> console.log('MongoDB connected')).catch(err => console.log(err));
->>>>>>> 3ce45a75a66a330fd52456a74f59935d10ba554b
+
 
 }
 
