@@ -3,7 +3,7 @@ var bcrypt=require("bcryptjs");
 var smtpTransport=nodemailer.createTransport({
 	service: "Gmail",
 	auth:{
-		user: "wolfsharenc@gmai.com",
+		user: "ncroommatefinder@gmail.com",
 		pass: "9197375362"
 	}
 });
