@@ -13,13 +13,8 @@ const port=8082;
 const constant = require('./constants');
 
 app.listen(port,()=>{
-<<<<<<< HEAD
-    console.log('Server started on port'+ port);
-})
-=======
     console.log('Server started on port '+ port);
 });
->>>>>>> 2aab7fa57c8c12b28dcefceeb2eef9be1a741e09
 
 
 //Handlebars Middleware
@@ -37,15 +32,8 @@ mongoose.Promise= global.Promise;
 
 // Connect to mongoDB
 function connect () {
-<<<<<<< HEAD
-    mongoose.connect('mongodb://localhost:27017').then(()=> console.log('MongoDB connected')).catch(err => console.log(err));
-=======
-<<<<<<< HEAD
     mongoose.connect('mongodb://localhost:27017').then(()=> console.log('MongoDB connected')).catch(err=>console.log(err));
-=======
-        mongoose.connect('mongodb://localhost').then(()=> console.log('MongoDB connected')).catch(err => console.log(err));
->>>>>>> 3ce45a75a66a330fd52456a74f59935d10ba554b
-    >>>>>>> 2aab7fa57c8c12b28dcefceeb2eef9be1a741e09
+
 
 }
 
