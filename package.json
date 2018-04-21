@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Aishwarya2/RoommateFinder#readme",
   "dependencies": {
+    "Q": "^1.0.0",
     "bcrypt": "*",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
@@ -35,7 +36,10 @@
     "express-messages": "*",
     "express-session": "^1.15.6",
     "express-validator": "*",
+<<<<<<< HEAD
     "generatorics": "^1.1.0",
+=======
+>>>>>>> 2aab7fa57c8c12b28dcefceeb2eef9be1a741e09
     "js-combinatorics": "^0.5.3",
     "mongodb-core": "~1.0",
     "mongoose": "^5.0.10",
@@ -46,6 +50,7 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
+    "q": "^1.5.1",
     "save": "^2.3.2"
   }
 }
