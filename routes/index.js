@@ -499,9 +499,10 @@ module.exports = function (app,User,mongoose,session) {
 		User.find({email: req.body.chat}, (err, docs)=>{
 			if(err)
 			throw err;
-			
 			res.render('search/chat', {hasloggedin: hasloggedin,usersession: req.session.user[0],chatWith: docs[0].first_name+" "+docs[0].last_name});
 		})
+
+
 	});
 	//Logout
 	app.get('/logout', function (req, res) {

@@ -33,6 +33,7 @@
     "express-messages": "*",
     "express-session": "^1.15.6",
     "express-validator": "*",
+    "mongodb": "^3.0.7",
     "mongodb-core": "~1.0",
     "mongoose": "^5.0.10",
     "mongoose-type-email": "^1.0.5",
