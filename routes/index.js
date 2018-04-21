@@ -164,6 +164,47 @@ module.exports = function (app,User,mongoose,session) {
             for (var i = 0, len = arr.length; i < len; i++) {
                 var aray = arr[i];
                 var querymod = {aray};
+                
+                /*CHANGES MADE BY KAVI STARTS Line 168-207*/
+                
+                String.prototype.removeWord = function(searchWord){
+                    var str = this;
+                    var n = str.search(searchWord);
+                    while(str.search(searchWord) > -1){
+                        n = str.search(searchWord);
+                        str = str.substring(0, n) + str.substring(n + 1, str.length);
+                    }
+                    return str;
+                }
+
+                function replaceAt(string, index, replace) {
+                    return string.substring(0, index) + replace + string.substring(index + 1);
+                }
+
+                //var charr = "{{email: {$ne: currUser.email}} {status: {$ne: NotAvailable}} {room_sharing: currUser.room_sharing}}";
+                var charr = querymod
+                console.log(charr)
+
+                for (i=0; i<charr.length; i++) {
+                    if (charr[i] == "}"){
+                        if (charr[i+1] == " "){
+                            if (charr[i+2] == "{"){
+                                charr = replaceAt(charr,i, "z"); 
+                                charr = replaceAt(charr,i+1, ","); 
+                                charr = replaceAt(charr, i+2, " "); 
+                            }
+                        }
+                    }
+                }
+
+                console.log(charr)
+                charr = charr.removeWord('z');
+                console.log(charr)
+                charr = charr.slice(1, -1)
+                console.log(charr)
+                querymod = charr
+                
+                /*CHANGES MADE BY KAVI ENDS*/
 
                 /*CHANGES MADE BY KAVI STARTS Line 168-207*/
 
