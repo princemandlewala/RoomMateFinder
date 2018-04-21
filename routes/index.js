@@ -163,10 +163,11 @@ module.exports = function (app,User,mongoose,session) {
             var results_arr = [];
             for (var i = 0, len = arr.length; i < len; i++) {
                 var aray = arr[i];
-                var querymod = {aray};
-                
+                var querymod = aray;
+                console.log(querymod);
+
                 /*CHANGES MADE BY KAVI STARTS Line 168-207*/
-                
+                querymod=JSON.stringify(querymod);
                 String.prototype.removeWord = function(searchWord){
                     var str = this;
                     var n = str.search(searchWord);
@@ -187,7 +188,7 @@ module.exports = function (app,User,mongoose,session) {
 
                 for (i=0; i<charr.length; i++) {
                     if (charr[i] == "}"){
-                        if (charr[i+1] == " "){
+                        if (charr[i+1] == ","){
                             if (charr[i+2] == "{"){
                                 charr = replaceAt(charr,i, "z"); 
                                 charr = replaceAt(charr,i+1, ","); 
@@ -202,7 +203,8 @@ module.exports = function (app,User,mongoose,session) {
                 console.log(charr)
                 charr = charr.slice(1, -1)
                 console.log(charr)
-                querymod = charr
+                var obj=JSON.parse(charr)
+                console.log(obj);
                 
                 /*CHANGES MADE BY KAVI ENDS*/
 
@@ -241,7 +243,7 @@ module.exports = function (app,User,mongoose,session) {
             }
             console.log(results_arr);
 
-            q.all(results_arr).then(function (data) {
+            Q.all(results_arr).then(function (data) {
                 console.log(data);
             }).catch(function () {
                 console.log("Error");
