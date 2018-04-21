@@ -4,3 +4,6 @@ npm-debug.log
 /*.env
 package-lock.json
 .vscodep
+package.json
+package-lock.json
+
