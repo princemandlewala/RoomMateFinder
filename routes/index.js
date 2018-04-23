@@ -13,10 +13,16 @@ var updatedchar=false;
 var hasupdatedCharacteristics=false;
 var emailsess;
 var hasloggedin=false;
+var chat;
+global.chatWith;
 //var logger=require('../app/views/partials')(hasloggedin);
 const login = require('../app/controllers/home');
 const userProfile=require('../app/controllers/profile');
 const search = require('../app/controllers/search');
+const mongoose=require('mongoose');
+var chatModel = require('../models/ChatModel');
+//const chatModel=mongoose.model('SomeModel');
+
 
 
 module.exports = function (app,User,mongoose,session) {
@@ -243,7 +249,6 @@ module.exports = function (app,User,mongoose,session) {
 			bcrypt.compare(req.body.loginPassword, docs[0].password, function(err, doesMatch){
 				if (doesMatch){
 					hasloggedin=true;
-					console.log(hasloggedin)
 					req.session.user=docs;
 					console.log('session id is'+req.sessionID)
 					console.log(docs[0].first_name);
@@ -488,22 +493,34 @@ module.exports = function (app,User,mongoose,session) {
 				connectmessage.push({text:'Your connection email has been sent successfully with your contact details! The person will contact you if interested!!'});
 				res.render('search/connectprofile',{connectmessage: connectmessage});
 			}
-		})
-	})
+		});
+	});
 
-	})
+	});
 	//chat with user
 	app.post('/chat', (req, res)=>{
 		console.log("doing chat");
-		console.log(req.body.chat+" username");
-		User.find({email: req.body.chat}, (err, docs)=>{
-			if(err)
-			throw err;
-			res.render('search/chat', {hasloggedin: hasloggedin,usersession: req.session.user[0],chatWith: docs[0].first_name+" "+docs[0].last_name});
-		})
-
-
+		global.chatWith = req.body.chat;
+		//console.log(userName+" from back");
+		chatModel.viewChat(req.session.user[0].email,req.body.chat,function(response){
+			chat = response.ObjectArray;
+			console.log(chat+" null chat");
+			res.render('search/chat', {hasloggedin: hasloggedin,usersession: req.session.user[0],chatWith: global.chatWith, chat: chat});
+		});
 	});
+
+	app.post('/chatMessages',(req,res)=>{
+		console.log(req.session.user[0].email+" me");
+		console.log("hiee "+ global.chatWith);
+		console.log(req.body.chatToBeSend+" message sent");
+		chatModel.insertToChat(req.session.user[0].email, global.chatWith, req.body.chatToBeSend, req.session.user[0].email, function(response){
+			chat = response.ObjectArray;
+			console.log(chat+" inside chat Messages");
+			res.render('search/chat', {hasloggedin: hasloggedin,usersession: req.session.user[0],chatWith: global.chatWith, chat:chat});
+			req.body.chatToBeSend=='';
+		});
+		
+	})
 	//Logout
 	app.get('/logout', function (req, res) {
 		req.session.destroy();
